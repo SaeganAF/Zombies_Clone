@@ -2,25 +2,47 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public float speed = 10f;
-    public float lifetime = 3f;
+    public float speed = 40f;
+    public float lifetime = 5f;
+    public int damage = 1;
+
+    private Rigidbody rb;
 
     void Start()
     {
-        Destroy(gameObject, lifetime); // destroy after time
+        rb = GetComponent<Rigidbody>();
+
+        if (rb != null)
+        {
+            rb.linearVelocity = transform.forward * speed;
+        }
+
+        Destroy(gameObject, lifetime);
     }
 
-    void Update()
+    void OnTriggerEnter(Collider other)
     {
-        transform.Translate(Vector2.right * speed * Time.deltaTime);
-    }
+        Debug.Log("Bullet hit: " + other.name);
 
-    void OnTriggerEnter2D(Collider other)
-    {
         if (other.CompareTag("Enemy"))
         {
-            Destroy(other.gameObject); // destroy enemy
-            Destroy(gameObject);       // destroy bullet
+            EnemyHealth enemyHealth = other.GetComponent<EnemyHealth>();
+
+            if (enemyHealth == null)
+            {
+                enemyHealth = other.GetComponentInParent<EnemyHealth>();
+            }
+
+            if (enemyHealth != null)
+            {
+                enemyHealth.TakeDamage(damage);
+            }
+            else
+            {
+                Debug.LogWarning("EnemyHealth not found on " + other.name);
+            }
+
+            Destroy(gameObject);
         }
     }
 }
