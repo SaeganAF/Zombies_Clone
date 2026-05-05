@@ -132,16 +132,32 @@ public class EnemyAI : MonoBehaviour
 
     void Update()
     {
-        // If we never found the player, do nothing
         if (playerTransform == null) return;
 
-        float distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
+        // Always chase the player
+        agent.isStopped = false;
+        agent.SetDestination(playerTransform.position);
 
-        if (distanceToPlayer <= attackRange)
+        // Always face the player
+        FacePlayer();
+    }
+
+
+   /* void Update()
+    {
+        if (playerTransform == null) return;
+
+        // Determine if the enemy is actually close enough to attack
+        bool canAttack =
+            !agent.pathPending &&          // Path is fully calculated
+            agent.hasPath &&               // Agent has a valid path
+            agent.remainingDistance != Mathf.Infinity && // Path is valid
+            agent.remainingDistance > 0f &&              // Not stuck with 0 distance
+            agent.remainingDistance <= attackRange;      // Actually within attack range
+
+        if (canAttack)
         {
             // ── ATTACK STATE ───────────────────────────────────────
-            // Stop moving and attack the player
-
             agent.isStopped = true;
 
             attackTimer -= Time.deltaTime;
@@ -154,21 +170,18 @@ public class EnemyAI : MonoBehaviour
         else
         {
             // ── CHASE STATE ────────────────────────────────────────
-            // Keep moving toward the player.
-            // The NavMeshAgent handles all pathfinding automatically —
-            // it recalculates a path around obstacles every frame.
-
             agent.isStopped = false;
             agent.SetDestination(playerTransform.position);
 
-            // Reset the attack timer while chasing so the attack is ready
-            // as soon as the enemy closes the distance
+            // Reset attack timer so the enemy can attack immediately when close
             attackTimer = 0f;
         }
 
-        // Always face toward the player (rotates on the Y axis only)
         FacePlayer();
     }
+    */
+
+
 
     /// <summary>
     /// Smoothly rotates the enemy to look at the player.
@@ -195,16 +208,16 @@ public class EnemyAI : MonoBehaviour
     ///   if (health != null) health.TakeDamage(damagePerHit);
     /// </summary>
     void AttackPlayer()
+{
+    // Deal damage to the player using your PlayerStats singleton
+    if (PlayerStats.Instance != null)
     {
-        Debug.Log("Enemy attacked the player for " + damagePerHit + " damage!");
-
-        // ── PLUG YOUR HEALTH SYSTEM IN HERE ──────────────────────
-        // Uncomment these lines once you have a PlayerHealth component:
-        //
-        // PlayerHealth health = playerTransform.GetComponent<PlayerHealth>();
-        // if (health != null)
-        //     health.TakeDamage(damagePerHit);
+        PlayerStats.Instance.TakeDamage(damagePerHit);
     }
+
+    Debug.Log("Enemy attacked the player for " + damagePerHit + " damage!");
+}
+
 
     /// <summary>
     /// Draws a red sphere in the Scene view (not visible in Game view) showing attack range.
