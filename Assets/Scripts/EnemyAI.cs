@@ -79,7 +79,7 @@ public class EnemyAI : MonoBehaviour
     /// is always slower than the player — you can always escape by walking.
     /// Raise this value to make the game harder.
     /// </summary>
-    public float moveSpeed = 3f;
+    public float moveSpeed = 5f;
 
     [Header("Attack Settings")]
 

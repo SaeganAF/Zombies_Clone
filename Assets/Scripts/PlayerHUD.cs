@@ -211,7 +211,8 @@ public class PlayerHUD : MonoBehaviour
     void UpdateRoundUI()
     {
         if (PlayerStats.Instance == null || roundText == null) return;
-        roundText.text = "ROUND " + PlayerStats.Instance.CurrentRound;
+        //roundText.text = "ROUND " + PlayerStats.Instance.CurrentRound;
+        roundText.text = "ENDLESS SURVIVAL";
     }
 
     // ──────────────────────────────────────────

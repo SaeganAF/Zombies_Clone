@@ -32,6 +32,14 @@ public class PlayerShoot : MonoBehaviour
     void Start()
     {
         hud = FindObjectOfType<PlayerHUD>();
+        if (PlayerStats.Instance != null)
+        {
+            if (PlayerStats.Instance.isWeaponUpgraded)
+            {
+                fireRate = 0.15f;
+            }
+            PlayerStats.Instance.OnWeaponUpgraded.AddListener(() => fireRate = 0.15f);
+        }
     }
 
     void Update()

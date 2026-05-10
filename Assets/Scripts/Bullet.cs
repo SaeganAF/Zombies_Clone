@@ -12,6 +12,12 @@ public class Bullet : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
 
+        if (PlayerStats.Instance != null && PlayerStats.Instance.isWeaponUpgraded)
+        {
+            speed = 40f;
+            damage = 6;
+        }
+
         if (rb != null)
         {
             rb.linearVelocity = transform.forward * speed;

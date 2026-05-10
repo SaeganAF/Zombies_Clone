@@ -294,10 +294,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FirstPersonMovement
   walkSpeed: 5
   runSpeed: 8
-  jumpForce: 3
-  jumpCooldown: 0.1
+  jumpForce: 2
+  jumpCooldown: 1
   gravity: -9.81
-  fallMultiplier: 2.5
+  fallMultiplier: 7.5
   groundCheck: {fileID: 0}
   groundDistance: 0.2
   groundMask:

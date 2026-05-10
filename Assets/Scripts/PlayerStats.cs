@@ -25,6 +25,9 @@ public class PlayerStats : MonoBehaviour
     public int maxAmmoInMag  = 30;
     public int maxAmmoReserve = 120;
 
+    [Header("Weapon Upgrades")]
+    public bool isWeaponUpgraded = false;
+
     [Header("Starting Points")]
     public int startingPoints = 500;
 
@@ -46,6 +49,7 @@ public class PlayerStats : MonoBehaviour
     [HideInInspector] public UnityEvent OnAmmoChanged    = new UnityEvent();
     [HideInInspector] public UnityEvent OnRoundChanged   = new UnityEvent();
     [HideInInspector] public UnityEvent OnDeath          = new UnityEvent();
+    [HideInInspector] public UnityEvent OnWeaponUpgraded = new UnityEvent();
 
     // ──────────────────────────────────────────
     //  Lifecycle
@@ -87,6 +91,13 @@ public class PlayerStats : MonoBehaviour
     public void Heal(int amount)
     {
         CurrentHealth = Mathf.Min(maxHealth, CurrentHealth + amount);
+        OnHealthChanged.Invoke();
+    }
+
+    /// <summary>Set health to a specific value, clamped between 0 and maxHealth.</summary>
+    public void SetHealth(int value)
+    {
+        CurrentHealth = Mathf.Clamp(value, 0, maxHealth);
         OnHealthChanged.Invoke();
     }
 
@@ -143,6 +154,17 @@ public class PlayerStats : MonoBehaviour
     {
         AmmoReserve = Mathf.Min(maxAmmoReserve, AmmoReserve + amount);
         OnAmmoChanged.Invoke();
+    }
+//   /// <summary>Upgrade ammo capacities (called by WeaponUpgradeStation).</summary>
+    public void UpgradeAmmoCaps(int newMagMax, int newReserveMax)
+    {
+    maxAmmoInMag = newMagMax;
+    maxAmmoReserve = newReserveMax;
+
+    AmmoInMag = Mathf.Min(AmmoInMag, maxAmmoInMag);
+    AmmoReserve = Mathf.Min(AmmoReserve, maxAmmoReserve);
+
+    OnAmmoChanged.Invoke();
     }
 
     // ──────────────────────────────────────────
