@@ -223,7 +223,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyAI
   moveSpeed: 3
-  attackRange: 1.5
+  attackRange: 3
   attackCooldown: 1
   damagePerHit: 10
 --- !u!114 &1935533836676638286

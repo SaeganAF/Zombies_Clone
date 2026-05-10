@@ -103,7 +103,7 @@ public class EnemyAI : MonoBehaviour
     private Transform playerTransform;
 
     // Tracks time so we only attack once per attackCooldown seconds
-    private float attackTimer = 0f;
+    private float attackTimer = 1f;
 
     void Start()
     {
@@ -130,7 +130,7 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-    void Update()
+    /*void Update()
     {
         if (playerTransform == null) return;
 
@@ -141,25 +141,18 @@ public class EnemyAI : MonoBehaviour
         // Always face the player
         FacePlayer();
     }
+    */
 
 
-   /* void Update()
+    void Update()
     {
         if (playerTransform == null) return;
 
-        // Determine if the enemy is actually close enough to attack
-        bool canAttack =
-            !agent.pathPending &&          // Path is fully calculated
-            agent.hasPath &&               // Agent has a valid path
-            agent.remainingDistance != Mathf.Infinity && // Path is valid
-            agent.remainingDistance > 0f &&              // Not stuck with 0 distance
-            agent.remainingDistance <= attackRange;      // Actually within attack range
+        float distance = Vector3.Distance(transform.position, playerTransform.position);
 
-        if (canAttack)
+        if (distance <= attackRange)
         {
-            // ── ATTACK STATE ───────────────────────────────────────
             agent.isStopped = true;
-
             attackTimer -= Time.deltaTime;
             if (attackTimer <= 0f)
             {
@@ -169,17 +162,14 @@ public class EnemyAI : MonoBehaviour
         }
         else
         {
-            // ── CHASE STATE ────────────────────────────────────────
             agent.isStopped = false;
             agent.SetDestination(playerTransform.position);
-
-            // Reset attack timer so the enemy can attack immediately when close
-            attackTimer = 0f;
+            attackTimer = attackCooldown;
         }
 
         FacePlayer();
     }
-    */
+    
 
 
 
