@@ -72,6 +72,7 @@ using UnityEngine.AI; // Required for NavMeshAgent
 public class EnemyAI : MonoBehaviour
 {
     [Header("Movement")]
+    public float baseSpeed = 3.5f;
 
     /// <summary>
     /// How fast the enemy moves (units per second).
@@ -111,7 +112,8 @@ public class EnemyAI : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
 
         // Apply our speed setting to the agent
-        agent.speed = moveSpeed;
+        agent.speed = baseSpeed * DifficultyManager.Instance.GetSpeedMultiplier();
+
 
         // Prevent the NavMeshAgent from rotating the enemy itself;
         // we handle facing toward the player manually in Update

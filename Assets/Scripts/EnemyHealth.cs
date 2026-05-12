@@ -14,8 +14,11 @@ public class EnemyHealth : MonoBehaviour
 
     void Start()
     {
+        int extra = DifficultyManager.Instance.GetExtraHealth();
+        maxHealth += extra;
         currentHealth = maxHealth;
     }
+
 
     public void TakeDamage(int damage)
     {

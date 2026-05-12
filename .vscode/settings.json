@@ -67,5 +67,5 @@
         "*.sln": "*.csproj",
         "*.slnx": "*.csproj"
     },
-    "dotnet.defaultSolution": "Zombies_clone.slnx"
+    "dotnet.defaultSolution": "Zombies_Clone.slnx"
 }
