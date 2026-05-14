@@ -1,14 +1,6 @@
 using UnityEngine;
 
-/// <summary>
-/// WeaponUpgradeStation lets the player buy a weapon upgrade to increase bullet speed to 40, damage to 5, fire rate to 0.6, max ammo in mag to 45, and max ammo reserve to 240 for points by pressing F near it.
-///
-/// HOW TO SET UP:
-///   1. Create a cube in the Hierarchy (3D Object -> Cube), rename it "WeaponUpgradeStation"
-///   2. Add a Box Collider, check "Is Trigger"
-///   3. Attach this script to it
-///   4. Set the cost (default 4000)
-/// </summary>
+
 public class WeaponUpgradeStation : MonoBehaviour
 {
     [Header("Settings")]

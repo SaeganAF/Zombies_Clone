@@ -1,13 +1,6 @@
 using UnityEngine;
 
-/// <summary>
-/// PlayerJump handles jumping mechanics for the player.
-/// This works in conjunction with FirstPersonMovement to add jumping capability.
-/// The jump force is applied to the CharacterController's velocity.
-/// 
-/// IMPORTANT: Attach this to the same GameObject as FirstPersonMovement.
-/// This script will retrieve and modify the FirstPersonMovement's velocity.
-/// </summary>
+
 public class PlayerJump : MonoBehaviour
 {
     [Header("Jump Settings")]
@@ -62,10 +55,7 @@ public class PlayerJump : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Attempts to make the player jump if allowed (grounded and cooldown expired).
-    /// Applies upward velocity to the CharacterController.
-    /// </summary>
+  
     private void TryJump()
     {
         // Check if player is grounded AND jump cooldown has expired

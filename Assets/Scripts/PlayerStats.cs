@@ -51,9 +51,7 @@ public class PlayerStats : MonoBehaviour
     [HideInInspector] public UnityEvent OnDeath          = new UnityEvent();
     [HideInInspector] public UnityEvent OnWeaponUpgraded = new UnityEvent();
 
-    // ──────────────────────────────────────────
-    //  Lifecycle
-    // ──────────────────────────────────────────
+
     void Awake()
     {
         // Singleton setup
@@ -69,9 +67,7 @@ public class PlayerStats : MonoBehaviour
         AmmoReserve   = maxAmmoReserve;
     }
 
-    // ──────────────────────────────────────────
-    //  Health
-    // ──────────────────────────────────────────
+
 
     /// <summary>Call this when the player is hit by a zombie or hazard.</summary>
     public void TakeDamage(int amount)
@@ -101,13 +97,7 @@ public class PlayerStats : MonoBehaviour
         OnHealthChanged.Invoke();
     }
 
-    // ──────────────────────────────────────────
-    //  Points
-    // ──────────────────────────────────────────
 
-    /// <summary>
-    /// Award points to the player (e.g. for hitting or killing a zombie).
-    /// Returns true always — use AddPoints for rewards.
     /// </summary>
     public void AddPoints(int amount)
     {
@@ -115,10 +105,7 @@ public class PlayerStats : MonoBehaviour
         OnPointsChanged.Invoke();
     }
 
-    /// <summary>
-    /// Spend points. Returns true if the player had enough points.
-    /// Returns false and does nothing if they cannot afford it.
-    /// </summary>
+  
     public bool SpendPoints(int amount)
     {
         if (Points < amount) return false;
@@ -127,9 +114,7 @@ public class PlayerStats : MonoBehaviour
         return true;
     }
 
-    // ──────────────────────────────────────────
-    //  Ammo
-    // ──────────────────────────────────────────
+
 
     /// <summary>Called by PlayerShoot each time a bullet is fired.</summary>
     public void UseBullet()
@@ -167,9 +152,7 @@ public class PlayerStats : MonoBehaviour
     OnAmmoChanged.Invoke();
     }
 
-    // ──────────────────────────────────────────
-    //  Round
-    // ──────────────────────────────────────────
+ 
 
     /// <summary>Advance to the next round — called by EnemySpawner.</summary>
     public void AdvanceRound()

@@ -1,16 +1,6 @@
 using UnityEngine;
 
-/// <summary>
-/// FirstPersonCameraSetup is a utility script that helps configure and manage the first-person camera.
-/// While basic camera rotation is handled by FirstPersonController, this script provides utilities
-/// for camera effects, field of view, and other camera-related settings.
-/// 
-/// You can expand this script to add features like:
-/// - Camera bob (movement effect)
-/// - Field of view changes (zoom/scope)
-/// - Head tilt on strafe
-/// - Recoil on weapon fire
-/// </summary>
+
 public class FirstPersonCameraSetup : MonoBehaviour
 {
     [Header("Camera References")]

@@ -1,73 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI; // Required for NavMeshAgent
 
-/// <summary>
-/// EnemyAI makes an enemy automatically chase the player using Unity's NavMesh system.
-///
-/// The NavMesh is a "map" that Unity bakes (pre-calculates) from your scene's geometry.
-/// It tells the NavMeshAgent exactly which areas are walkable, so the enemy will
-/// automatically walk AROUND walls, pillars, and other obstacles instead of getting stuck.
-///
-/// ─────────────────────────────────────────────────────────────
-///  HOW TO CREATE THE ENEMY PREFAB (step by step)
-/// ─────────────────────────────────────────────────────────────
-///  1. In the Hierarchy, right-click → 3D Object → Capsule.
-///     Rename it "Enemy".
-///
-///  2. Give it a colour so it's easy to spot:
-///     a. In the Project window → right-click → Create → Material. Name it "EnemyMaterial".
-///     b. In the Inspector for that material, click the Albedo colour box and pick red/green/etc.
-///     c. Drag the material from the Project window onto the Enemy capsule in the Scene view.
-///
-///  3. Add the NavMeshAgent component:
-///     Select the Enemy in the Hierarchy → In the Inspector click "Add Component"
-///     → search for "Nav Mesh Agent" → click it to add.
-///     This is what allows the enemy to navigate around obstacles.
-///
-///  4. Add THIS script (EnemyAI):
-///     With the Enemy still selected → "Add Component" → search "EnemyAI" → click it.
-///
-///  5. Set the Enemy's Tag:
-///     At the top of the Inspector, click the "Tag" dropdown → "Add Tag..."
-///     → click the + button → type "Enemy" → Save.
-///     Then select your Enemy again and set its Tag to "Enemy".
-///
-///  6. Make it a Prefab:
-///     Drag the Enemy from the Hierarchy down into the Assets/Prefabs folder in the
-///     Project window. A blue cube icon will appear — that's your Prefab!
-///     You can now delete the original from the Hierarchy (the Prefab is saved).
-///
-/// ─────────────────────────────────────────────────────────────
-///  HOW TO BAKE THE NAVMESH (so enemies can navigate)
-/// ─────────────────────────────────────────────────────────────
-///  The NavMesh must be baked from your scene's floor/walls BEFORE the enemies can navigate.
-///
-///  1. Select every wall, floor, and ceiling piece in the Hierarchy.
-///     (Click the first one, then Shift+Click the last, or Ctrl+Click individual ones.)
-///
-///  2. In the Inspector, click "Add Component" → search "NavMesh Surface".
-///     If you don't see it, it is in the AI Navigation package:
-///       → Window → Package Manager → search "AI Navigation" → Install it.
-///
-///     Alternatively, use the older bake method:
-///       → Window → AI → Navigation (Obsolete)
-///       → Click the "Bake" tab → click the "Bake" button.
-///       A blue overlay will appear on walkable surfaces — that's the NavMesh.
-///
-///  3. Mark static geometry:
-///     Select all floor/wall objects, and at the top-right of the Inspector
-///     check the "Static" checkbox (or the dropdown → "Navigation Static").
-///     This tells Unity to include them in the NavMesh bake.
-///
-/// ─────────────────────────────────────────────────────────────
-///  HOW TO CONNECT EVERYTHING IN THE SPAWNER
-/// ─────────────────────────────────────────────────────────────
-///  1. Select your EnemySpawner GameObject in the Hierarchy.
-///  2. Drag the Enemy Prefab from Assets/Prefabs into the "Enemy Prefab" slot.
-///  3. Make sure your Player GameObject has its Tag set to "Player".
-///  4. Press Play — enemies will spawn and chase you!
-///
-/// </summary>
+
 [RequireComponent(typeof(NavMeshAgent))]
 public class EnemyAI : MonoBehaviour
 {
@@ -191,14 +125,7 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Called when the enemy is close enough to hit the player.
-    /// Currently just logs a message — replace this with your health system later.
-    ///
-    /// EXAMPLE of how to deal damage once you have a PlayerHealth script:
-    ///   PlayerHealth health = playerTransform.GetComponent&lt;PlayerHealth&gt;();
-    ///   if (health != null) health.TakeDamage(damagePerHit);
-    /// </summary>
+
     void AttackPlayer()
 {
     // Deal damage to the player using your PlayerStats singleton
@@ -211,10 +138,6 @@ public class EnemyAI : MonoBehaviour
 }
 
 
-    /// <summary>
-    /// Draws a red sphere in the Scene view (not visible in Game view) showing attack range.
-    /// This is a helpful visual debug tool — no gameplay impact.
-    /// </summary>
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;

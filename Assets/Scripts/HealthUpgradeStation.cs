@@ -2,11 +2,6 @@ using UnityEngine;
 
 /// <summary>
 /// HealthUpgradeStation lets the player buy a health upgrade to increase max health to 150 for points by pressing F near it.
-///
-/// HOW TO SET UP:
-///   1. Create a cube in the Hierarchy (3D Object -> Cube), rename it "HealthUpgradeStation"
-///   2. Add a Box Collider, check "Is Trigger"
-///   3. Attach this script to it
 ///   4. Set the cost (default 3000)
 /// </summary>
 public class HealthUpgradeStation : MonoBehaviour

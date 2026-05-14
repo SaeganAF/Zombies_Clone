@@ -1,14 +1,5 @@
 using UnityEngine;
 
-/// <summary>
-/// FirstPersonMovement handles player movement and gravity using Unity's CharacterController.
-/// The CharacterController is ideal for FPS games because it provides:
-/// - Built-in collision handling without physics
-/// - Smooth movement without rigidbody quirks
-/// - Precise control over gravity and jumping foundations
-/// 
-/// This script requires a CharacterController component on the same GameObject.
-/// </summary>
 [RequireComponent(typeof(CharacterController))]
 public class FirstPersonMovement : MonoBehaviour
 {

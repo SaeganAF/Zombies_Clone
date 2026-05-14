@@ -2,59 +2,10 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
-/// <summary>
-/// PlayerHUD wires up the Unity UI canvas to PlayerStats data.
-/// Every time a stat changes, PlayerStats fires an event and
-/// PlayerHUD updates the matching UI element.
-///
-/// ═══════════════════════════════════════════
-/// HOW TO SET UP THE HUD CANVAS
-/// ═══════════════════════════════════════════
-///
-/// 1. CREATE THE CANVAS
-///    • GameObject → UI → Canvas
-///    • Set Canvas "Render Mode" to Screen Space - Overlay
-///    • On the Canvas Scaler component:
-///        UI Scale Mode  → Scale With Screen Size
-///        Reference Res  → 1920 × 1080
-///        Match          → 0.5
-///
-/// 2. ADD A CANVAS GROUP (optional, for fade-in on start)
-///    • Add a CanvasGroup component to the Canvas itself.
-///
-/// 3. CREATE EACH HUD ELEMENT (all inside the Canvas)
-///    ┌─────────────────────────────────────────────────────────┐
-///    │ ELEMENT          │ TYPE              │ ANCHOR           │
-///    ├─────────────────────────────────────────────────────────┤
-///    │ HealthText       │ TextMeshPro - UI  │ Bottom-Left      │
-///    │ HealthBar        │ UI Slider         │ Bottom-Left      │
-///    │ PointsText       │ TextMeshPro - UI  │ Top-Center       │
-///    │ RoundText        │ TextMeshPro - UI  │ Top-Left         │
-///    │ AmmoText         │ TextMeshPro - UI  │ Bottom-Right     │
-///    │ CrosshairImage   │ UI Image          │ Center           │
-///    │ HitMarkerImage   │ UI Image (red ✕)  │ Center           │
-///    │ BuyPromptPanel   │ Panel             │ Center           │
-///    │  └ BuyPromptText │ TextMeshPro - UI  │ fill parent      │
-///    └─────────────────────────────────────────────────────────┘
-///
-/// 4. ATTACH THIS SCRIPT to the Canvas (or an empty HUD GameObject).
-///
-/// 5. DRAG each UI object into the matching slot in the Inspector.
-///
-/// ═══════════════════════════════════════════
-/// SUGGESTED TEXT FORMATS (editable here)
-/// ═══════════════════════════════════════════
-///   Health  → "100 HP"
-///   Points  → "500 PTS"
-///   Round   → "ROUND 1"
-///   Ammo    → "30 / 120"
-/// </summary>
+
 public class PlayerHUD : MonoBehaviour
 {
-    // ──────────────────────────────────────────
-    //  Inspector References
-    // ──────────────────────────────────────────
-
+ 
     [Header("Health UI")]
     [Tooltip("TextMeshPro text that shows current HP")]
     public TextMeshProUGUI healthText;
@@ -100,15 +51,11 @@ public class PlayerHUD : MonoBehaviour
     [Range(0f, 1f)]
     public float lowHealthThreshold = 0.35f;
 
-    // ──────────────────────────────────────────
-    //  Private State
-    // ──────────────────────────────────────────
+
     private float hitMarkerTimer;
     private bool  vignetteActive;
 
-    // ──────────────────────────────────────────
-    //  Lifecycle
-    // ──────────────────────────────────────────
+
     void Start()
     {
         // Wait one frame so PlayerStats.Instance is guaranteed to exist
@@ -176,9 +123,7 @@ public class PlayerHUD : MonoBehaviour
         }
     }
 
-    // ──────────────────────────────────────────
-    //  UI Update Methods (called by events)
-    // ──────────────────────────────────────────
+
 
     void UpdateHealthUI()
     {
@@ -215,14 +160,6 @@ public class PlayerHUD : MonoBehaviour
         roundText.text = "ENDLESS SURVIVAL";
     }
 
-    // ──────────────────────────────────────────
-    //  Public Helpers (called by other scripts)
-    // ──────────────────────────────────────────
-
-    /// <summary>
-    /// Flash the hit marker for hitMarkerDuration seconds.
-    /// Call this from PlayerShoot when a bullet hits an enemy.
-    /// </summary>
     public void ShowHitMarker()
     {
         if (hitMarkerImage == null) return;
